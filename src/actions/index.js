@@ -31,11 +31,23 @@ export function addCar(garage, car, callback) {
   };
 }
 
-export function fetchCar(garage, id) {
-  const promise = fetch(`${BASE_URL}/${garage}/cars/${id}`)
-  .then(response => response.json());
+export function fetchCar(id) {
+  const promise = fetch(`${BASE_URL}/cars/${id}`)
+    .then(response => response.json());
   return {
-  type: 'FETCH_CAR',
-  payload: promise
+    type: 'FETCH_CAR',
+    payload: promise
   };
  } 
+
+ export function removeCar(history, car) {
+  const url = `${BASE_URL}/cars/${car.id}`;
+  fetch(url, { method: 'DELETE' })
+    .then(r => r.json())
+    .then(() => history.push(""));
+
+  return {
+    type: 'REMOVE_CAR',
+    payload: car
+  };
+}
