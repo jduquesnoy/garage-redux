@@ -30,3 +30,12 @@ export function addCar(garage, car, callback) {
     payload: request // Will be resolved by redux-promise
   };
 }
+
+export function fetchCar(garage, id) {
+  const promise = fetch(`${BASE_URL}/${garage}/cars/${id}`)
+  .then(response => response.json());
+  return {
+  type: 'FETCH_CAR',
+  payload: promise
+  };
+ } 
